@@ -1,0 +1,24 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block header %}
+  <h2>Public Topics</h2>
+{% endblock header %}
+
+{% block content %}
+
+  <ul>
+    {% for topic in topics %}
+      <li>
+        <h3>
+            <a href="{% url 'learning_logs:topic' topic.id %}">{{topic}}</a>
+            <small>
+              created by {{topic.owner}}
+            </small>
+        </h3>
+      </li>
+    {% empty %}
+      <h1>There aren't any Public Topics Yet</h1>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}

@@ -17,4 +17,8 @@ urlpatterns = [
 	url(r'^new_entry/(?P<topic_id>\d+)$', views.new_entry, name = 'new_entry'),
 	#Page to Edit Entry
 	url(r'^edit_entry/(?P<entry_id>\d+)/$', views.edit_entry, name = 'edit_entry'),
+	#Page showing Public Topics
+	url(r'^public/$', views.public, name = 'public'),
+	#Switches Public setting on a topic
+	url(r'^switch/(?P<topic_id>\d+)$', views.switch, name = 'switch'),
 ]

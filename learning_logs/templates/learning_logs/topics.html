@@ -1,25 +1,53 @@
 {% extends "learning_logs/base.html" %}
 
 {% block header %}
-	<h2>Your Topics:</h2>
+	<h2>Your Topics
+		<small>
+			<a href = "{% url 'learning_logs:new_topic' %}">Add a New Topic</a>
+		</small>
+	</h2>
 {% endblock header %}
 
 {% block content %}
-
-<ul>
-	{% for topic in topics %}
-		<li>
-			<h3>
-				<a href = "{% url 'learning_logs:topic' topic.id %}"> {{topic}} </a>
-			</h3>
-		</li>
-	{% empty %}
-		<li>No topics have been added yet.</li>
-	{% endfor %}
-</ul> 
+	<h2>Private Topics:</h2>
+	<ul>
+		{% for topic in topics %}
+			{% if topic.public == False %}
+				<li>
+					<h3>
+						<a href = "{% url 'learning_logs:topic' topic.id %}"> {{topic}} </a>
+						<small>
+							<a href="{% url 'learning_logs:switch' topic.id %}">Switch to Public</a>
+						</small>
+					</h3>
+				</li>
+			{% endif %}
+		{% empty %}
+			<li>No topics have been added yet.</li>
+		{% endfor %}
+	</ul>
+	
+	<h2>Public Topics:</h2>
+	<ul>
+		{% for topic in topics %}
+			{% if topic.public == True %}
+				<li>
+					<h3>
+						<a href = "{% url 'learning_logs:topic' topic.id %}"> {{topic}} </a>
+						<small>
+							<a href="{% url 'learning_logs:switch' topic.id %}">Switch to Private</a>
+						</small>
+					</h3>
+				</li>
+			{% endif %}
+		{% empty %}
+			<li>No topics have been added yet.</li>
+		{% endfor %}
+	</ul>
+	
 
 <h3>
-	<a href = "{% url 'learning_logs:new_topic' %}">Add a New Topic</a>
+	
 </h3>
 
 {% endblock content %}

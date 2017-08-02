@@ -6,6 +6,7 @@ class Topic(models.Model):
 	text = models.CharField(max_length=200)
 	date_added = models.DateTimeField(auto_now_add=True)
 	owner = models.ForeignKey(User)
+	public = models.BooleanField(default=False)
 
 	def __str__(self):
 		'''Return a string representation of the model'''
@@ -16,6 +17,7 @@ class Entry(models.Model):
 	topic = models.ForeignKey(Topic)
 	text = models.TextField()
 	date_added = models.DateTimeField(auto_now_add=True)
+	owner = models.ForeignKey(User)
 
 	class Meta:
 		verbose_name_plural = 'entries'
